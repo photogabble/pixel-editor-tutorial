@@ -23,8 +23,8 @@ var Pixels = function( options )
                             on: false,
                             x: ((x - 1) * private.pixelW),
                             y: ((y - 1) * private.pixelH),
-                            h: private.pixelH,
-                            w: private.pixelW
+                            h: (private.pixelH - 1),
+                            w: (private.pixelW - 1)
                         }
                     );
                 }
@@ -148,21 +148,16 @@ var ImageCanvas = function( options )
                         // Reset mouseover
                         currentPixel.mouseOver = false;
 
-                        if ( Mouse.x >= currentPixel.x && Mouse.x <= (currentPixel.x + currentPixel.w)){
-                            if ( Mouse.y >= currentPixel.y && Mouse.y <= (currentPixel.y + currentPixel.h) ){
+                        if ( Mouse.x >= (private.offset.x + currentPixel.x) && Mouse.x <= (private.offset.x + currentPixel.x + currentPixel.w)){
+                            if ( Mouse.y >= (private.offset.y + currentPixel.y) && Mouse.y <= (private.offset.y + currentPixel.y + currentPixel.h) ){
                                 currentPixel.mouseOver = true;
-
-                                console.log('Pixel!');
-
                                 if (Mouse.events.mousedown === true)
                                 {
-                                    currentPixel.on = !currentPixel.on;
+                                    currentPixel.on = ( Mouse.events.mouseButton === 1) ? true : false;
                                 }
                             }
                         }
-
                         private.pixels.setPixel( x, y, currentPixel );
-
                     }
                 }
             }
@@ -170,9 +165,27 @@ var ImageCanvas = function( options )
 
         render: function ( step, canvas, context )
         {
-            
-            context.putImageData( private.cGrid, 0, 0 );
+            context.putImageData( private.cGrid, private.offset.x, private.offset.y );
 
+            for (var y = 1; y <= private.yPixels; y+= 1)
+            {
+                for (var x = 1; x <= private.xPixels; x+= 1)
+                {
+                    var currentPixel = private.pixels.getPixel( x, y );
+
+                    if ( currentPixel.on === true)
+                    {
+                        context.fillStyle = 'rgba(0,0,0,1)';
+                        context.fillRect( (private.offset.x + currentPixel.x + 1), (private.offset.y + currentPixel.y + 1), (private.pixelW - 1), (private.pixelH - 1) );
+                    }
+
+                    if ( currentPixel.mouseOver === true)
+                    {
+                        context.fillStyle = 'rgba(0,0,0,0.2)';
+                        context.fillRect( (private.offset.x + currentPixel.x + 1), (private.offset.y + currentPixel.y + 1), (private.pixelW - 1), (private.pixelH - 1) );
+                    }
+                }
+            }
         }
     };
 };
