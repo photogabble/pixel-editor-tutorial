@@ -153,7 +153,7 @@ var ImageCanvas = function( options )
                                 currentPixel.mouseOver = true;
                                 if (Mouse.events.mousedown === true)
                                 {
-                                    currentPixel.on = ( Mouse.events.mouseButton === 1) ? true : false;
+                                    currentPixel.on = ( Mouse.events.mouseButton === 1);
                                 }
                             }
                         }
@@ -219,6 +219,7 @@ $('#paintMe').on('mouseout', function(e)
 {
     Mouse.events.mousemove   = false;
     Mouse.events.mouseover   = false;
+    Mouse.events.mousedown   = false;
     Mouse.events.mouseout    = true;
     Mouse.events.mouseButton = 0;
 
