@@ -55,6 +55,33 @@ var Pixels = function( options )
     return public;
 };
 
+var Preview = function( options ){
+
+    var private      = {};
+    private.offset   = (options !== undefined && options.offset !== undefined) ? options.offset : { x: 341, y: 295 };
+    private.loaded   = false;
+    private.cCanvas  = $('<canvas/>').attr({ width: 43, height: 43 });
+    private.cContext = private.cCanvas.get(0).getContext("2d");
+    private.cCache   = null;
+
+    return {
+
+        getPreview: function(){
+
+        },
+
+        update: function(){
+
+        },
+
+        render: function(){
+
+        }
+
+    };
+
+};
+
 var ImageCanvas = function( options )
 {
     // Private Properties & Methods
@@ -255,7 +282,6 @@ $('#paintMe').on('mouseup', function(e)
 $('#paintMe').contextmenu(function() {
     return false;
 });
-
 
 var App = {
     timestamp: function() {
