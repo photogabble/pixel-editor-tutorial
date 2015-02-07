@@ -60,22 +60,33 @@ var Preview = function( options ){
     var private      = {};
     private.offset   = (options !== undefined && options.offset !== undefined) ? options.offset : { x: 341, y: 295 };
     private.loaded   = false;
-    private.cCanvas  = $('<canvas/>').attr({ width: 43, height: 43 });
+    private.cCanvas  = $('<canvas/>').attr({ width: 43, height: 36 });
     private.cContext = private.cCanvas.get(0).getContext("2d");
     private.cCache   = null;
 
     return {
 
-        getPreview: function(){
+        update: function( step, canvas, context ){
+
+            private.cContext.clearRect(0, 0, 43, 36);
+
+            private.cContext.font      = '10px Arial';
+            private.cContext.fillStyle = '#000000';
+            private.cContext.fillText( 'Preview', 3.5, 10);
+
+            private.cContext.fillRect( 13, 15, 18, 18);
+
+            private.cContext.fillStyle = '#FFFFFF';
+            private.cContext.fillRect( 14, 16, 16, 16);
+
+            private.cCache = private.cContext.getImageData( 0, 0, 43, 36);
+            private.loaded = true;
 
         },
 
-        update: function(){
-
-        },
-
-        render: function(){
-
+        render: function( step, canvas, context ){
+            if ( ! private.loaded ){ return; }
+            context.putImageData( private.cCache, private.offset.x, private.offset.y );
         }
 
     };
@@ -317,6 +328,8 @@ var App = {
 };
 
 var iCanvas = new ImageCanvas();
+var iPreview = new Preview();
+
 App.run({
     canvas: $('#paintMe'),
     fps: 60,
@@ -358,11 +371,13 @@ App.run({
         }
 
         iCanvas.update( step, canvas, context );
+        iPreview.update( step, canvas, context);
 
     },
     render: function(step, canvas, context){
 
         iCanvas.render( step, canvas, context );
+        iPreview.render( step, canvas, context );
 
     }
 });
