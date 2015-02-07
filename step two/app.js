@@ -55,44 +55,6 @@ var Pixels = function( options )
     return public;
 };
 
-var Preview = function( options ){
-
-    var private      = {};
-    private.offset   = (options !== undefined && options.offset !== undefined) ? options.offset : { x: 341, y: 295 };
-    private.loaded   = false;
-    private.cCanvas  = $('<canvas/>').attr({ width: 43, height: 36 });
-    private.cContext = private.cCanvas.get(0).getContext("2d");
-    private.cCache   = null;
-
-    return {
-
-        update: function( step, canvas, context ){
-
-            private.cContext.clearRect(0, 0, 43, 36);
-
-            private.cContext.font      = '10px Arial';
-            private.cContext.fillStyle = '#000000';
-            private.cContext.fillText( 'Preview', 3.5, 10);
-
-            private.cContext.fillRect( 13, 15, 18, 18);
-
-            private.cContext.fillStyle = '#FFFFFF';
-            private.cContext.fillRect( 14, 16, 16, 16);
-
-            private.cCache = private.cContext.getImageData( 0, 0, 43, 36);
-            private.loaded = true;
-
-        },
-
-        render: function( step, canvas, context ){
-            if ( ! private.loaded ){ return; }
-            context.putImageData( private.cCache, private.offset.x, private.offset.y );
-        }
-
-    };
-
-};
-
 var ImageCanvas = function( options )
 {
     // Private Properties & Methods
@@ -101,7 +63,7 @@ var ImageCanvas = function( options )
     private.yPixels  = (options !== undefined && options.yPixels !== undefined) ? options.yPixels : 16;
     private.pixelH   = (options !== undefined && options.pixelH !== undefined) ? options.pixelH : 20;
     private.pixelW   = (options !== undefined && options.pixelW !== undefined) ? options.pixelW : 20;
-    
+
     private.offset   = (options !== undefined && options.offset !== undefined) ? options.offset : { x: 10, y: 10 };
 
     private.pixels   = new Pixels( {
@@ -127,7 +89,7 @@ var ImageCanvas = function( options )
     private.cContext.beginPath();
     private.cContext.strokeStyle = "#DDDDDD";
     private.cContext.lineWidth   = "1";
-    
+
     for (var y = 20; y <= private.cHeight; y += private.pixelH) {
         private.cContext.moveTo(0.5 + y, 1);
         private.cContext.lineTo(0.5 + y, private.cHeight - 1);
@@ -139,7 +101,7 @@ var ImageCanvas = function( options )
     }
 
     private.cContext.stroke();
-    
+
     private.cGrid = private.cContext.getImageData(0,0, private.cWidth, private.cHeight);
 
     // Public Properties & Methods
@@ -164,10 +126,10 @@ var ImageCanvas = function( options )
 
         update: function ( step, canvas, context )
         {
-            if( 
+            if(
                 (Mouse.x > 0 && Mouse.y > 0) &&
                 (Mouse.x >= 0 && Mouse.x <= private.cWidth)  &&
-                (Mouse.y >= 0 && Mouse.y <= private.cHeight) 
+                (Mouse.y >= 0 && Mouse.y <= private.cHeight)
             ){
                 console.log('ImageCanvas has focus!');
                 private.hasFocus = true;
@@ -302,15 +264,15 @@ var App = {
     run: function(options)
     {
         var now,
-        dt       = 0,
-        last     = App.timestamp(),
-        slow     = options.slow || 1, // slow motion scaling factor
-        step     = 1/options.fps,
-        slowStep = slow * step,
-        update   = options.update,
-        render   = options.render,
-        canvas   = options.canvas,
-        context  = options.canvas.get(0).getContext("2d");
+            dt       = 0,
+            last     = App.timestamp(),
+            slow     = options.slow || 1, // slow motion scaling factor
+            step     = 1/options.fps,
+            slowStep = slow * step,
+            update   = options.update,
+            render   = options.render,
+            canvas   = options.canvas,
+            context  = options.canvas.get(0).getContext("2d");
 
         function frame() {
             now = App.timestamp();
@@ -328,8 +290,6 @@ var App = {
 };
 
 var iCanvas = new ImageCanvas();
-var iPreview = new Preview();
-
 App.run({
     canvas: $('#paintMe'),
     fps: 60,
@@ -371,13 +331,11 @@ App.run({
         }
 
         iCanvas.update( step, canvas, context );
-        iPreview.update( step, canvas, context);
 
     },
     render: function(step, canvas, context){
 
         iCanvas.render( step, canvas, context );
-        iPreview.render( step, canvas, context );
 
     }
 });
