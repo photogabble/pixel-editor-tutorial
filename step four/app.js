@@ -243,6 +243,83 @@ var ImageCanvas = function( options ) {
     };
 };
 
+var Palette = function( options ){
+    var private      = {};
+    private.offset   = (options !== undefined && options.offset !== undefined) ? options.offset : { x: 341, y: 63 };
+    private.loaded   = false;
+    private.cCanvas  = $('<canvas/>').attr({ width: 43, height: 222 });
+    private.cContext = private.cCanvas.get(0).getContext("2d");
+    private.cCache   = null;
+
+    private.palette   = [
+        '#000000',
+        '#FFFFFF',
+        '#9D9D9D',
+        '#BE2633',
+        '#E06F8B',
+        '#493C2B',
+        '#A46422',
+        '#EB8931',
+        '#F7E26B',
+        '#2F484E',
+        '#44891A',
+        '#A3CE27',
+        '#1B2632',
+        '#005784',
+        '#31A2F2',
+        '#B2DCEF'
+    ];
+
+    private.currentColour = '#000000';
+    private.hasFocus  = false;
+    private.paletteMousePositions = [];
+
+    private.setUpMousePositions = function()
+    {
+        private.paletteMousePositions = [];
+        var x  = 1;
+        var y  = 1;
+
+        for ( var i = 0; i<= private.palette.length - 1; i += 1)
+        {
+            var temp = {
+                x1: 0,
+                x2: 0,
+                y1: 0,
+                y2: 0,
+                color: private.palette[i]
+            };
+
+            temp.x1 = x;
+            temp.y1 = y;
+            temp.x2 = temp.x1 + 20;
+            temp.y2 = temp.y1 + 20;
+
+            x += 21;
+
+            if ( i % 2 == 1){ y+= 21; x = 1; }
+
+            private.paletteMousePositions[i] = temp;
+        }
+
+        private.loaded = true;
+    };
+
+    private.setUpMousePositions();
+
+    return {
+
+        update: function( step, canvas, context)
+        {
+
+        },
+        render: function( step, canvas, context)
+        {
+
+        }
+    }
+};
+
 var Mouse = {
     x: 0,
     y: 0,
@@ -344,6 +421,7 @@ var App = {
 
 var iCanvas = new ImageCanvas();
 var iPreview = new Preview();
+var iPalette = new Palette();
 
 App.run({
     canvas: $('#paintMe'),
@@ -387,12 +465,14 @@ App.run({
 
         iCanvas.update( step, canvas, context );
         iPreview.update( step, canvas, context);
+        iPalette.update( step, canvas, context);
 
     },
     render: function(step, canvas, context){
 
         iCanvas.render( step, canvas, context );
         iPreview.render( step, canvas, context );
+        iPalette.render( step, canvas, context);
 
     }
 });
