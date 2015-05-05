@@ -19,6 +19,7 @@ var Pixels = function( options ) {
                     this.setPixel(
                         x, y, {
                             mouseOver: false,
+                            colour: '#000000',
                             on: false,
                             x: ((x - 1) * private.pixelW),
                             y: ((y - 1) * private.pixelH),
@@ -89,7 +90,7 @@ var Preview = function( options ){
                     var currentPixel = mPixels.getPixel( x, y);
                     if ( currentPixel.on === true )
                     {
-                        private.cContext.fillStyle = '#000000';
+                        private.cContext.fillStyle = currentPixel.colour;
                         private.cContext.fillRect( (14 + x - 1) ,( 16 + y - 1), 1, 1);
                     }
                 }
@@ -206,7 +207,16 @@ var ImageCanvas = function( options ) {
                                 currentPixel.mouseOver = true;
                                 if (Mouse.events.mousedown === true)
                                 {
-                                    currentPixel.on = ( Mouse.events.mouseButton === 1);
+                                    // If the left mouse button is pressed then switch the
+                                    // pixel on and set its colour. Otherwise switch the pixel
+                                    // off and reset its colour.
+                                    if (Mouse.events.mouseButton === 1){
+                                        currentPixel.on = true;
+                                        currentPixel.colour = iPalette.getCurrentColour();
+                                    }else{
+                                        currentPixel.on = false;
+                                        currentPixel.colour = '#FFFFFF';
+                                    }
                                 }
                             }
                         }
@@ -228,14 +238,25 @@ var ImageCanvas = function( options ) {
 
                     if ( currentPixel.on === true)
                     {
-                        context.fillStyle = 'rgba(0,0,0,1)';
-                        context.fillRect( (private.offset.x + currentPixel.x + 1), (private.offset.y + currentPixel.y + 1), (private.pixelW - 1), (private.pixelH - 1) );
+                        // Use the currentPixel.colour to display the pixel
+                        context.fillStyle = currentPixel.colour;
+                        context.fillRect(
+                            (private.offset.x + currentPixel.x + 1),
+                            (private.offset.y + currentPixel.y + 1),
+                            (private.pixelW - 1),
+                            (private.pixelH - 1)
+                        );
                     }
 
                     if ( currentPixel.mouseOver === true)
                     {
                         context.fillStyle = 'rgba(0,0,0,0.2)';
-                        context.fillRect( (private.offset.x + currentPixel.x + 1), (private.offset.y + currentPixel.y + 1), (private.pixelW - 1), (private.pixelH - 1) );
+                        context.fillRect(
+                            (private.offset.x + currentPixel.x + 1),
+                            (private.offset.y + currentPixel.y + 1),
+                            (private.pixelW - 1),
+                            (private.pixelH - 1)
+                        );
                     }
                 }
             }
