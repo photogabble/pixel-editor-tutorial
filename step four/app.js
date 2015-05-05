@@ -312,10 +312,105 @@ var Palette = function( options ){
         update: function( step, canvas, context)
         {
 
+            // Sometimes this method is called by the main loop before the objects
+            // constructor has time to initialise, the following line stops
+            // that from happening.
+            if ( private.loaded === false ){ return; }
+
+            // Check to see if the Pallet object has focus, and resetting the mouse
+            // cursor if not.
+            if (
+                Mouse.x >= private.offset.x &&
+                Mouse.x <= ( private.offset.x + 43 ) &&
+                Mouse.y >= private.offset.y &&
+                Mouse.y <= ( private.offset.y + 222 )
+            ){
+                private.hasFocus = true;
+            }else{
+                private.hasFocus = false;
+                canvas.css('cursor', 'auto');
+            }
+
+            if (private.hasFocus === true)
+            {
+                // Check to see if the mouse cursor is within the pallet picker
+                // area, and over a selectable colour then change the cursor to
+                // let the user know that they can interact
+                if(
+                    Mouse.x >= (private.offset.x + 1) &&
+                    Mouse.x <= (private.offset.x + 43 ) &&
+                    Mouse.y >= (private.offset.y + 1) &&
+                    Mouse.y <= (private.offset.y + 168 )
+                ){
+                    canvas.css('cursor', 'pointer');
+
+                    // If the mouse is clicked then the current palette colour
+                    // to the hex value of the selected item
+                    if ( Mouse.events.mousedown === true) {
+                        for (var i = 0; i <= private.paletteMousePositions.length - 1; i += 1) {
+                            if (
+                                Mouse.x >= ( private.offset.x + private.paletteMousePositions[i].x1 ) &&
+                                Mouse.x <= ( private.offset.x + private.paletteMousePositions[i].x2 ) &&
+                                Mouse.y >= ( private.offset.y + private.paletteMousePositions[i].y1 ) &&
+                                Mouse.y <= ( private.offset.y + private.paletteMousePositions[i].y2 )
+                            ){
+                                if (private.currentColour !== private.paletteMousePositions[i].color)
+                                {
+                                    private.currentColour = private.paletteMousePositions[i].color;
+                                }
+                            }
+                        }
+                    }
+
+                }else{
+                    canvas.css('cursor', 'auto');
+                }
+            }
+
         },
         render: function( step, canvas, context)
         {
 
+            // Sometimes this method is called by the main loop before the objects
+            // constructor has time to initialise, the following line stops
+            // that from happening.
+            if ( private.loaded === false ){ return; }
+
+            // Clear the Palette context, ready for a re-draw
+            private.cContext.clearRect( 0 , 0 , 42, 170 );
+
+            // Draw a border and background
+            private.cContext.fillStyle = "#000000";
+            private.cContext.fillRect( 0, 0, 43, 169);
+            private.cContext.fillStyle = "#000000";
+            private.cContext.fillRect( 0, 179, 43, 43);
+
+            // Draw each coloured box for the pallet
+            var x = 1;
+            var y = 1;
+
+            for ( var i = 0; i<= private.palette.length - 1; i += 1)
+            {
+                private.cContext.fillStyle = private.palette[i];
+                private.cContext.fillRect( x, y, 20, 20);
+
+                x += 21;
+
+                if ( i % 2 == 1){ y+= 21; x = 1; }
+            }
+
+            // Draw the current colour
+            private.cContext.fillStyle = private.currentColour;
+            private.cContext.fillRect( 1, 180, 41, 41);
+
+            // Get the image data from the palette context and apply
+            // it to the main canvas context passed through by the
+            // main loop
+            context.putImageData( private.cContext.getImageData(0,0, 43, 222), private.offset.x, private.offset.y );
+
+        },
+        getCurrentColour: function(){
+            return private.currentColour;
         }
     }
 };
@@ -419,7 +514,7 @@ var App = {
     }
 };
 
-var iCanvas = new ImageCanvas();
+var iCanvas  = new ImageCanvas();
 var iPreview = new Preview();
 var iPalette = new Palette();
 
