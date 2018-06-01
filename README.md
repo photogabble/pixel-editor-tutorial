@@ -1,5 +1,5 @@
 <h1 align="center">Pixel Editor Tutorial</h1>
-<p align="center"><em>JavaScript Learning resources</em></p>
+<p align="center"><em>Pushing pixels since 2015</em></p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/photogabble/pixel-editor-tutorial.svg" alt="License"></a>
