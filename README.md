@@ -30,21 +30,22 @@ _Published May 8th 2015_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel
 In part four we expand the images data structure to expand the colour depth and add a colour swatch interface for selecting colours.
 
 ## Part Five
-_Unpublished_: Demo | Tutorial | Code | PR
+_Unpublished_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel-editor-in-javascript-p5/) | [Tutorial](https://www.photogabble.co.uk/blog/tutorials/writing-a-pixel-editor-in-javascript-p5/?utm_source=github&utm_medium=referral&utm_campaign=pixel_editor_tutorial_readme) | [Code](https://github.com/photogabble/pixel-editor-tutorial/tree/master/step%20five) | [PR](https://github.com/photogabble/pixel-editor-tutorial/pull/1)
 
 In part five we work on saving the image as a png and begin refactoring the code to keep things tidy.
 
 ## Part Six
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part six we write a simple PHP backend that is able to consume the image data structure as a string and store to a public library the png. We also write the functionality into our javascript app to be able to load from the public library.
+In part six we refactor the JavaScript code into ES6 and use babel to build the project.
 
 ## Part Seven
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part seven we refactor the JavaScript code into ES6 and use babel to build the project.
+In part seven we add the paint bucket tool and an undo history.
 
 ## Part Eight
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part eight we add the paint bucket tool and an undo history.
+In part eight we write a simple PHP backend that is able to consume the image data structure as a string and store to a public library the png. We also write the functionality into our javascript app to be able to load from the public library.
+
