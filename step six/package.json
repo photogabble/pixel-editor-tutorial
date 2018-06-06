@@ -2,9 +2,10 @@
   "name": "pixel-editor-tutorial-part-six",
   "version": "1.0.0",
   "description": "Part six of the Pixel Editor tutorial on photogabble.co.uk",
-  "main": "",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node node_modules/webpack/bin/webpack.js"
   },
   "author": "Simon Dann <simon.dann@gmail.com>",
   "license": "MIT",
