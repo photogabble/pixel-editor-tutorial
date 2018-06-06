@@ -37,15 +37,15 @@ In part five we work on saving the image as a png and begin refactoring the code
 ## Part Six
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part seven we refactor the JavaScript code into ES6 and use babel to build the project.
+In part six we refactor the JavaScript code into ES6 and use babel to build the project.
 
 ## Part Seven
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part eight we add the paint bucket tool and an undo history.
+In part seven we add the paint bucket tool and an undo history.
 
 ## Part Eight
 _Unpublished_: Demo | Tutorial | Code | PR
 
-In part six we write a simple PHP backend that is able to consume the image data structure as a string and store to a public library the png. We also write the functionality into our javascript app to be able to load from the public library.
+In part eight we write a simple PHP backend that is able to consume the image data structure as a string and store to a public library the png. We also write the functionality into our javascript app to be able to load from the public library.
 
