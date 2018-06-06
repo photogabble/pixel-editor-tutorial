@@ -545,6 +545,27 @@
             return false;
         });
 
+        $('#saveBtn').on('click', function () {
+            var cCanvas = $('<canvas/>').attr({width: 16, height: 16});
+            var cContext = cCanvas.get(0).getContext("2d");
+            var mPixels = iCanvas.get('pixels');
+
+            for (var y = 1; y <= 16; y += 1) {
+                for (var x = 1; x <= 16; x += 1) {
+                    var currentPixel = mPixels.getPixel(x, y);
+                    if (currentPixel.on === true) {
+                        cContext.fillStyle = currentPixel.colour;
+                        cContext.fillRect((x - 1), (y - 1), 1, 1);
+                    }
+                }
+            }
+
+            var link = document.createElement('a');
+            link.download = 'image.png';
+            link.href = cCanvas.get(0).toDataURL("image/png");
+            link.click();
+        });
+
         App.run({
             canvas: mainCanvas,
             fps: 60,
