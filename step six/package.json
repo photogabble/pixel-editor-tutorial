@@ -5,12 +5,14 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --mode=development",
+    "dev": "webpack --mode=development --config=webpack.development.config.js",
     "production": "webpack --mode=production"
   },
   "author": "Simon Dann <simon.dann@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
     "webpack": "^4.11.1",
     "webpack-cli": "^3.0.2"
   }
