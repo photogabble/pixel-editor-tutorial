@@ -10,6 +10,12 @@ export default class {
         this.cCanvas.width = 43;
         this.cCanvas.height = 36;
         this.cContext = this.cCanvas.getContext("2d");
+
+        if (options === undefined || options.iCanvas === undefined) {
+            throw new Error('Preview requires iCanvas be passed to it.');
+        }
+
+        this.iCanvas = options.iCanvas;
     }
 
     render(step, canvas, context) {
@@ -31,7 +37,7 @@ export default class {
         this.cContext.fillStyle = '#FFFFFF';
         this.cContext.fillRect(14, 16, 16, 16);
 
-        let mPixels = iCanvas.get('pixels');
+        let mPixels = this.iCanvas.get('pixels');
 
         for (let y = 1; y <= this.yPixels; y += 1) {
             for (let x = 1; x <= this.xPixels; x += 1) {
