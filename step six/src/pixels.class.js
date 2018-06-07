@@ -1,11 +1,6 @@
-export class Pixels {
-    xPixels = 0;
-    yPixels = 0;
-    pixelH = 0;
-    pixelW = 0;
-    pixels = [];
-
+export default class {
     constructor(options) {
+        this.pixels = [];
         this.xPixels = (options !== undefined && options.xPixels !== undefined) ? options.xPixels : 16;
         this.yPixels = (options !== undefined && options.yPixels !== undefined) ? options.yPixels : 16;
         this.pixelH = (options !== undefined && options.pixelH !== undefined) ? options.pixelH : 20;

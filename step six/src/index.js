@@ -1,4 +1,5 @@
-import {Pixels} from './pixels.class';
+import Pixels from './pixels.class';
+import Preview from './preview.class';
 
 (function($, window, document, undefined) {
     "use strict";
@@ -59,7 +60,7 @@ import {Pixels} from './pixels.class';
 
         publicVars.reset();
         return publicVars;
-    }; */
+    };
 
     var Preview = function( options ){
 
@@ -114,7 +115,7 @@ import {Pixels} from './pixels.class';
 
         };
 
-    };
+    };*/
 
     var ImageCanvas = function( options ) {
         // Private Properties & Methods
