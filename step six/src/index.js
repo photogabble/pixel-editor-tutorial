@@ -1,6 +1,9 @@
+import {Pixels} from './pixels.class';
+
 (function($, window, document, undefined) {
     "use strict";
 
+    /*
     // Image is a reserved word in JavaScript so I use Pixels instead
     var Pixels = function( options ) {
         // Private Properties & Methods
@@ -56,7 +59,7 @@
 
         publicVars.reset();
         return publicVars;
-    };
+    }; */
 
     var Preview = function( options ){
 
