@@ -18,13 +18,22 @@ let Mouse = {
 };
 
 const MouseEvents = (mainCanvas) => {
+    function offset(el) {
+        let rect = el.getBoundingClientRect();
+
+        return {
+            top: (rect.top + document.body.scrollTop),
+            left: (rect.left + document.body.scrollLeft)
+        }
+    }
+
     mainCanvas.addEventListener('mouseover', function (e) {
         Mouse.events.mouseover = true;
-        Mouse.x = Math.floor(e.clientX - $(this).offset().left);
-        Mouse.y = Math.floor(e.clientY - $(this).offset().top);
+        Mouse.x = Math.floor(e.clientX - offset(this).left);
+        Mouse.y = Math.floor(e.clientY - offset(this).top);
     });
 
-    mainCanvas.addEventListener('mouseout', function (e) {
+    mainCanvas.addEventListener('mouseout', function () {
         Mouse.events.mousemove = false;
         Mouse.events.mouseover = false;
         Mouse.events.mousedown = false;
@@ -37,8 +46,8 @@ const MouseEvents = (mainCanvas) => {
 
     mainCanvas.addEventListener('mousemove', function (e) {
         Mouse.events.mousemove = true;
-        Mouse.x = Math.floor(e.clientX - $(this).offset().left);
-        Mouse.y = Math.floor(e.clientY - $(this).offset().top);
+        Mouse.x = Math.floor(e.clientX - offset(this).left);
+        Mouse.y = Math.floor(e.clientY - offset(this).top);
         return false;
     });
 
@@ -49,7 +58,7 @@ const MouseEvents = (mainCanvas) => {
         return false;
     });
 
-    mainCanvas.addEventListener('mouseup', function (e) {
+    mainCanvas.addEventListener('mouseup', function () {
         Mouse.events.mousedown = false;
         Mouse.events.mouseup = true;
         Mouse.events.mouseButton = 0;

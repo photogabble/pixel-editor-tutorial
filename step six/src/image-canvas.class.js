@@ -63,12 +63,31 @@ export default class {
         }
     }
 
+    // eslint-disable-next-line no-unused-vars
     load(pixels) {
         // ...
     }
 
     save() {
-        // ...
+        let eCanvas = document.createElement('canvas');
+        eCanvas.width = 16;
+        eCanvas.height = 16;
+        let eContext = eCanvas.getContext("2d");
+
+        for (let y = 1; y <= 16; y += 1) {
+            for (let x = 1; x <= 16; x += 1) {
+                let currentPixel = this.pixels.getPixel(x, y);
+                if (currentPixel.on === true) {
+                    eContext.fillStyle = currentPixel.colour;
+                    eContext.fillRect((x - 1), (y - 1), 1, 1);
+                }
+            }
+        }
+
+        let link = document.createElement('a');
+        link.download = 'image.png';
+        link.href = eCanvas.toDataURL("image/png");
+        link.click();
     }
 
     update() {
@@ -77,7 +96,6 @@ export default class {
             (Mouse.x >= 0 && Mouse.x <= this.cWidth) &&
             (Mouse.y >= 0 && Mouse.y <= this.cHeight)
         ) {
-            console.log('ImageCanvas has focus!');
             this.hasFocus = true;
         } else {
             this.hasFocus = false;
