@@ -224,7 +224,7 @@ import Preview from './preview.class';
 
         return {
 
-            update: function( step, canvas, context)
+            update: function(step, canvas, context)
             {
 
                 // Sometimes this method is called by the main loop before the objects
