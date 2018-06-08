@@ -496,7 +496,7 @@ import Preview from './preview.class';
     };
 
     var iCanvas  = new ImageCanvas();
-    var iPreview = new Preview({
+    let iPreview = new Preview({
         iCanvas: iCanvas
     });
     var iPalette = new Palette();
