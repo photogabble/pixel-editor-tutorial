@@ -30,12 +30,12 @@ _Published May 8th 2015_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel
 In part four we expand the images data structure to expand the colour depth and add a colour swatch interface for selecting colours.
 
 ## Part Five
-_Unpublished_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel-editor-in-javascript-p5/) | [Tutorial](https://www.photogabble.co.uk/blog/tutorials/writing-a-pixel-editor-in-javascript-p5/?utm_source=github&utm_medium=referral&utm_campaign=pixel_editor_tutorial_readme) | [Code](https://github.com/photogabble/pixel-editor-tutorial/tree/master/step%20five) | [PR](https://github.com/photogabble/pixel-editor-tutorial/pull/1)
+_Published June 6th 2018_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel-editor-in-javascript-p5/) | [Tutorial](https://www.photogabble.co.uk/blog/tutorials/writing-a-pixel-editor-in-javascript-p5/?utm_source=github&utm_medium=referral&utm_campaign=pixel_editor_tutorial_readme) | [Code](https://github.com/photogabble/pixel-editor-tutorial/tree/master/step%20five) | [PR](https://github.com/photogabble/pixel-editor-tutorial/pull/1)
 
 In part five we work on saving the image as a png and begin refactoring the code to keep things tidy.
 
 ## Part Six
-_Unpublished_: Demo | Tutorial | Code | PR
+_Published June 11th 2018_: [Demo](http://builds.photogabble.co.uk/writing-a-pixel-editor-in-javascript-p6/) | [Tutorial](https://www.photogabble.co.uk/blog/tutorials/writing-a-pixel-editor-in-javascript-p6/) | [Code](https://github.com/photogabble/pixel-editor-tutorial/tree/master/step%20six) | [PR](https://github.com/photogabble/pixel-editor-tutorial/pull/3)
 
 In part six we refactor the JavaScript code into ES6 and use babel to build the project.
 
