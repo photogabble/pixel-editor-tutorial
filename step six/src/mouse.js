@@ -65,10 +65,9 @@ const MouseEvents = (mainCanvas) => {
         return false;
     });
 
-    // This returns false to disable the operating systems context menu on right click
-    // mainCanvas.onContextMenu(function() {
-    //     return false;
-    // });
+    mainCanvas.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    })
 };
 
 export {Mouse, MouseEvents};
