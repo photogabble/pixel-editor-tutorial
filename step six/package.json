@@ -1,0 +1,23 @@
+{
+  "name": "pixel-editor-tutorial-part-six",
+  "version": "1.0.0",
+  "description": "Part six of the Pixel Editor tutorial on photogabble.co.uk",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --env.development",
+    "production": "webpack --env.production"
+  },
+  "author": "Simon Dann <simon.dann@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.2"
+  }
+}
